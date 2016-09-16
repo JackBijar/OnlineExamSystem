@@ -112,6 +112,15 @@ jettyRunWar
 tomcatRun.contextPath = '/'
 tomcatRunWar.contextPath = '/'
 
+ task deploylocal(dependsOn: build) << {
+    println "Copy from ${libsDir.getPath()} into ${TOMCAT_HOME}/webapps"
+    copy{
+      from libsDir
+      into "${TOMCAT_HOME}/webapps"
+      include '*.war'
+    }
+  }
+
 eclipse 
 {
   wtp 
